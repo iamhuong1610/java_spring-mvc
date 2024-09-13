@@ -9,19 +9,8 @@ import vn.hoidanit.laptopshop.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-//mô hình mvc
-// @Controller
-
-// public class UserController {
-
-//     @RequestMapping("/")
-//     public String getHomPage() {
-
-//         return "hello from controller";
-//     }
-
-// mô hình restful api
-@RestController
+// mô hình mvc
+@Controller
 
 public class UserController {
 
@@ -31,9 +20,29 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("")
+    @RequestMapping("/")
     public String getHomPage() {
+        String test = this.userService.handleHello();
 
-        return this.userService.handleHello();
+        return "huong.html";
     }
 }
+
+// mô hình restful api
+// @RestController
+
+// public class UserController {
+
+// DI : DependencyInjection
+// private UserService userService;
+
+// public UserController(UserService userService) {
+// this.userService = userService;
+// }
+
+// @GetMapping("")
+// public String getHomPage() {
+
+// return this.userService.handleHello();
+// }
+// }

@@ -24,7 +24,7 @@ public class UserController {
     public String getHomPage() {
         String test = this.userService.handleHello();
 
-        return "huong.html";
+        return "hello";
     }
 }
 

@@ -28,6 +28,14 @@ public class UserController {
         model.addAttribute("huong", "this is variable from controller ");
         return "hello";
     }
+
+    @RequestMapping("/admin/user")
+    public String getUserPage(Model model) {
+        String test = this.userService.handleHello();
+        model.addAttribute("eric", test);
+        model.addAttribute("huong", "this is variable from controller ");
+        return "admin/user/create";
+    }
 }
 
 // mô hình restful api

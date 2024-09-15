@@ -1,6 +1,7 @@
 package vn.hoidanit.laptopshop.controller;
 
 import vn.hoidanit.laptopshop.domain.User;
+import vn.hoidanit.laptopshop.repository.UserRepository;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,17 +20,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
+    private final UserRepository userRepository;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @RequestMapping("/")
 
     public String getHomPage(Model model) {
         String test = this.userService.handleHello();
-        model.addAttribute("eric", test);
+        model.addAttribute("eric", "test");
         model.addAttribute("huong", "from controller with model");
 
         return "hello";
@@ -46,6 +49,7 @@ public class UserController {
 
     public String createUserPage(Model model, @ModelAttribute("newUser") User huong) {
         System.out.println("run here" + huong);
+        this.userService.handleSaveUser(huong);
         return "hello";
     }
 }

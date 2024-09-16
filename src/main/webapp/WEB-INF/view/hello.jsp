@@ -22,14 +22,43 @@
 
 </head>
 <body>
-    hello from jsp
-    <h1>
-       ${eric}//jsp
-    </h1>
-
-    <h2>
-        ${huong}
-    </h2>
-    <button class="btn btn-warning">Submit</button>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12 mx-auto">
+                <div class="d-flex justify-content-between">
+                    <h3>Table Users</h3>
+                    <a href="/admin/user/create" class="btn btn-primary">Create a user</a>
+                </div>
+                <div>
+                    <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Full Name</th>
+                            
+                            <th scope="col">Email</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <c:forEach var="user" items="${users}">
+                            <tr>
+                                <td>${item}</td>
+                                <td>${item}</td>
+                                <td class="d-flex">
+                                    <button class="btn btn-success">View</button>
+                                    <button class="btn btn-warning">Update</button>
+                                    <button class="btn btn-danger">Delete</button>
+                                    
+                                </td>
+                            </tr>
+                          </c:forEach>
+                         
+                        </tbody>
+                      </table>    
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

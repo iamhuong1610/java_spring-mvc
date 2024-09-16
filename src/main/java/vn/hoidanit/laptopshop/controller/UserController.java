@@ -14,6 +14,7 @@ import vn.hoidanit.laptopshop.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import java.util.List;
 
 // mô hình mvc
 @Controller
@@ -31,6 +32,8 @@ public class UserController {
     @RequestMapping("/")
 
     public String getHomPage(Model model) {
+        List<User> arrUsers = this.userService.getAllUsersByEmail("huongthienbinh2003@gmail.com");
+        System.out.println(arrUsers);
         String test = this.userService.handleHello();
         model.addAttribute("eric", "test");
         model.addAttribute("huong", "from controller with model");

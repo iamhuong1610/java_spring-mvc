@@ -53,6 +53,8 @@ public class UserController {
     @RequestMapping("/admin/user/{id}") // get
     public String getDetailUserPage(Model model, @PathVariable long id) {
         System.out.println("Check path id: " + id);
+        User user = this.userService.findUserById(id);
+        model.addAttribute("user1", user);
         model.addAttribute("id", id);
         return "admin/user/show";
     }

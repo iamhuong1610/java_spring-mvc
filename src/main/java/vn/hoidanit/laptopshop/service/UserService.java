@@ -33,4 +33,11 @@ public class UserService {
         return huong;
 
     }
+
+    public User findUserById(long id) {
+        User user = this.userRepository.findUserById(id);
+        System.out.println(user);
+        return user;
+
+    }
 }

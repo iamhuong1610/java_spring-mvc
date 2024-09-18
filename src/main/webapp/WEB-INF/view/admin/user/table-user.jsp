@@ -49,9 +49,9 @@
                             <td>${user.email}</td>
                            
                             <td class="d-flex">
-                                <button class="btn btn-success">View</button>
-                                <button class="btn btn-warning mx-2">Update</button>
-                                <button class="btn btn-danger">Delete</button>
+                                <a href="/admin/user/${user.id}" class="btn btn-success">View</a>
+                                <a class="btn btn-warning mx-2">Update</a>
+                                <a class="btn btn-danger">Delete</a>
                                 
                             </td>
                         </tr>

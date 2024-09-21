@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 // mô hình mvc
 @Controller
@@ -59,6 +61,30 @@ public class UserController {
         return "admin/user/show";
     }
 
+    @RequestMapping("/admin/user/update/{id}") // get
+    public String getUpdateUserPage(Model model, @PathVariable long id) {
+        System.out.println("Check path id: " + id);
+        User currentUser = this.userService.findUserById(id);
+        model.addAttribute("newUser", currentUser);
+
+        return "admin/user/update";
+    }
+
+    @PostMapping("/admin/user/update")
+    public String postUpdateUser(Model model, @ModelAttribute("newUser") User huong) {
+        User currentUser = this.userService.findUserById(huong.getId());
+        if (currentUser != null) {
+            System.out.println("run here: ");
+            currentUser.setAddress(huong.getAddress());
+            currentUser.setFullName(huong.getFullName());
+            currentUser.setPhone(huong.getPhone());
+            this.userService.handleSaveUser(currentUser);
+
+        }
+
+        return "redirect:/admin/user";
+    }
+
     @RequestMapping("/admin/user/create") // get
     public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User());
@@ -72,4 +98,20 @@ public class UserController {
         this.userService.handleSaveUser(huong);
         return "redirect:/admin/user";
     }
+
+    @GetMapping("/admin/user/delete/{id}")
+    public String deleteUserPage(Model model, @PathVariable long id) {
+
+        model.addAttribute("id", id);
+        model.addAttribute("newUser", new User());
+        return "admin/user/delete";
+    }
+
+    @PostMapping("/admin/user/delete")
+    public String postDeleteUser(Model model, @ModelAttribute("newUser") User huong) {
+        this.userService.deleteAUser(huong.getId());
+        System.out.println("run here: ");
+        return "redirect:/admin/user";
+    }
+
 }

@@ -1,4 +1,4 @@
-package vn.hoidanit.laptopshop.controller;
+package vn.hoidanit.laptopshop.controller.admin;
 
 import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.repository.UserRepository;
@@ -49,7 +49,7 @@ public class UserController {
         List<User> users = this.userService.getAllUsers();
         System.out.println(">>> check user: " + users);
         model.addAttribute("user1", users);
-        return "admin/user/table-user";
+        return "admin/user/show";
     }
 
     @RequestMapping("/admin/user/{id}") // get
@@ -58,7 +58,7 @@ public class UserController {
         User user = this.userService.findUserById(id);
         model.addAttribute("user1", user);
         model.addAttribute("id", id);
-        return "admin/user/show";
+        return "admin/user/detail";
     }
 
     @RequestMapping("/admin/user/update/{id}") // get

@@ -40,8 +40,9 @@
                               <table class="table table-bordered">
                                   <thead>
                                     <tr>
-                                      <th scope="col">#</th>
+                                      <th scope="col">ID</th>
                                       <th scope="col">Full Name</th>
+                                      <th scope="col">Role</th>
                                       
                                       <th scope="col">Email</th>
                                       <th scope="col">Action</th>
@@ -52,6 +53,7 @@
                                       <tr>
                                           <td>${user.id}</td>
                                           <td>${user.fullName}</td>
+                                          <td>${user.role.name}</td>
                                           <td>${user.email}</td>
                                          
                                           <td class="d-flex">

@@ -46,23 +46,23 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <!-- <c:forEach var="user" items="${users1}">
+                                                <c:forEach var="product" items="${product1}">
                                                     <tr>
                                                         <th>${user.id}</th>
                                                         <td>${user.email}</td>
                                                         <td>${user.fullName}</td>
                                                         <td>${user.role.name}</td>
                                                         <td>
-                                                            <a href="/admin/user/${user.id}"
+                                                            <a href="/admin/product/${user.id}"
                                                                 class="btn btn-success">View</a>
-                                                            <a href="/admin/user/update/${user.id}"
+                                                            <a href="/admin/product/update/${user.id}"
                                                                 class="btn btn-warning  mx-2">Update</a>
-                                                            <a href="/admin/user/delete/${user.id}"
+                                                            <a href="/admin/product/delete/${user.id}"
                                                                 class="btn btn-danger">Delete</a>
                                                         </td>
                                                     </tr>
 
-                                                </c:forEach> -->
+                                                </c:forEach> 
 
                                             </tbody>
                                         </table>

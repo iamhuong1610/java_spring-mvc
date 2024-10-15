@@ -1,18 +1,17 @@
 package vn.hoidanit.laptopshop.controller.admin;
 
 import vn.hoidanit.laptopshop.domain.User;
-import vn.hoidanit.laptopshop.repository.UserRepository;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.servlet.ServletContext;
+import jakarta.validation.Valid;
 import vn.hoidanit.laptopshop.service.UpLoadService;
 import vn.hoidanit.laptopshop.service.UserService;
 
@@ -21,13 +20,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 // mô hình mvc
 @Controller
@@ -52,7 +46,7 @@ public class UserController {
     public String getHomPage(Model model) {
         List<User> arrUsers = this.userService.getAllUsersByEmail("huongthienbinh2003@gmail.com");
         System.out.println(arrUsers);
-        String test = this.userService.handleHello();
+
         model.addAttribute("eric", "test");
         model.addAttribute("huong", "from controller with model");
 
@@ -110,8 +104,17 @@ public class UserController {
 
     @PostMapping(value = "/admin/user/create")
 
-    public String createUserPage(Model model, @ModelAttribute("newUser") User huong,
+    public String createUserPage(Model model, @ModelAttribute("newUser") @Valid User huong,
+            BindingResult newUserBindingResult,
             @RequestParam("hoidanitFile") MultipartFile file) {
+
+        List<FieldError> errors = newUserBindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(error.getField() + " - " + error.getDefaultMessage());
+        }
+        if (newUserBindingResult.hasErrors()) {
+            return "admin/user/create";
+        }
 
         String avatar = this.upLoadService.handleSaveUploadFile(file, "avatar");
         String hashPassword = this.passwordEncoder.encode(huong.getPassword());

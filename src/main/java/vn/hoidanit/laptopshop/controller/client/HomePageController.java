@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 import vn.hoidanit.laptopshop.domain.Product;
 import vn.hoidanit.laptopshop.service.ProductService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomePageController {
@@ -25,6 +26,11 @@ public class HomePageController {
         List<Product> products = this.productService.fetchProducts();
         model.addAttribute("products", products);
         return "client/homepage/show";
+    }
+
+    @GetMapping("/register")
+    public String getRegisterPage(Model model) {
+        return "client/auth/register";
     }
 
 }
